@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  app1:
+    build:
+      dockerfile: ./Dockerfile
+      args:
+        JAR_FILE: "build/libs/app1*.jar"
+    ports:
+      - "8100:8080"
+    environment:
+      PROFILE: dev
+      PORT: 8080
+    container_name: app1
