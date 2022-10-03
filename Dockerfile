@@ -1,0 +1,1 @@
+FROM 748392735374.dkr.ecr.us-west-2.amazonaws.com/base:amazoncorretto-17.0.3-alpine3.15
