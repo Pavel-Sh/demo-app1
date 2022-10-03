@@ -2,7 +2,8 @@ version: '3.7'
 services:
   app1:
     build:
-      dockerfile: ./Dockerfile
+      context: "."
+      dockerfile: Dockerfile
       args:
         JAR_FILE: "build/libs/app1*.jar"
     ports:
