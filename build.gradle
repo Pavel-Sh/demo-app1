@@ -9,13 +9,18 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
-	mavenLocal()
+	maven {
+		url 'https://test-748392735374.d.codeartifact.us-west-2.amazonaws.com/maven/test/'
+		credentials {
+			username "aws"
+			password System.env.CODEARTIFACT_AUTH_TOKEN
+		}
+	}
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.pavel:module1:0.0.1-SNAPSHOT'
+	implementation 'com.pavel:module1:0.0.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
