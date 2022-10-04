@@ -20,8 +20,7 @@ pipeline {
         stage('app1 docker build') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                     sh """docker build --build-arg JAR_FILE=./build/libs/app1-0.0.1-SNAPSHOT.jar --tag 748392735374.dkr.ecr.us-west-2
-                     .amazonaws.com/app1:latest ."""
+                     sh """docker build --build-arg JAR_FILE=./build/libs/app1-0.0.1-SNAPSHOT.jar --tag 748392735374.dkr.ecr.us-west-2.amazonaws.com/app1:latest ."""
                 }
             }
         }
