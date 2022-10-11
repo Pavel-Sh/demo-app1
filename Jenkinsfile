@@ -20,18 +20,20 @@ pipeline {
         stage('app1 docker build') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                     sh """docker build --build-arg JAR_FILE=./build/libs/app1-0.0.1-SNAPSHOT.jar --tag 748392735374.dkr.ecr.us-west-2.amazonaws.com/app1:latest ."""
+                     TAG = env.BRANCH_NAME.replace('master', 'latest')
+                     sh """docker build --build-arg JAR_FILE=./build/libs/app1-0.0.1-SNAPSHOT.jar --tag 748392735374.dkr.ecr.us-west-2.amazonaws.com/app1:$TAG ."""
                 }
             }
         }
         stage('app1 publish to ECR') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    TAG = env.BRANCH_NAME.replace('master', 'latest')
                     sh '''
                         aws configure set aws_access_key_id ${USERNAME}
                         aws configure set aws_secret_access_key ${PASSWORD}
                         aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 748392735374.dkr.ecr.us-west-2.amazonaws.com
-                        docker push 748392735374.dkr.ecr.us-west-2.amazonaws.com/app1:latest
+                        docker push 748392735374.dkr.ecr.us-west-2.amazonaws.com/app1:$TAG
                     '''
                 }
             }
