@@ -10,7 +10,7 @@ public class App1Controller {
 
     @GetMapping("/hello")
     public ResponseEntity<?> callHello() {
-        String body = "feature1";
+        String body = new HelloService().sayHello() + "feature1";
         return ResponseEntity.ok(body);
     }
 }
